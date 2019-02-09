@@ -28,10 +28,38 @@ class TodosController < ApplicationController
 
   end
 
+  def edittask
+    puts params
+    puts "11111111111111111111111111111111111111111111111111111111"
+    @todo = Todo.find(params[:id])
+
+    if @todo.update(task: params[:task])
+      render :json => {message: "Success"} and return
+    else
+      render :json => {message: "Error"} and return
+    end
+  end
+
+  def edit
+    @todo=Todo.find(params[:id])
+  end
+
+  def update
+    @todo = Todo.find(params[:id])
+
+    if @todo.update(todo_params)
+      render :json => {message: "Success"} and return
+    else
+      render :json => {message: "Error"} and return
+    end
+  end
+
+
+
   private
 
   def todo_params
-    params.permit(params[:task])
+    params.permit(params[:task],params[:id])
   end
 
 
