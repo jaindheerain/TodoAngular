@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  post 'todos/edit/:id', :to => 'todos#edittask'
+  post 'todos/edit/:id', :to => 'todos#editTask'
+
+  post 'todos/delete/:id', :to => 'todos#deleteTask'
 
   resources :todos
 

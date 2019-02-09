@@ -16,7 +16,7 @@ class TodosController < ApplicationController
     posts = Todo.all
 
     if(posts.size==0)
-      posts={list:[{task: "Things empty"}]}
+      posts=[{task: "Things empty"}]
     end
     render :json => posts and return end
 
@@ -28,7 +28,7 @@ class TodosController < ApplicationController
 
   end
 
-  def edittask
+  def editTask
     puts params
     puts "11111111111111111111111111111111111111111111111111111111"
     @todo = Todo.find(params[:id])
@@ -40,23 +40,18 @@ class TodosController < ApplicationController
     end
   end
 
-  def edit
-    @todo=Todo.find(params[:id])
-  end
+  def deleteTask
+    puts params
+    puts "11111111111111111111111111111111111111111111111111111111"
 
-  def update
-    @todo = Todo.find(params[:id])
-
-    if @todo.update(todo_params)
+    if Todo.destroy(params[:id])
       render :json => {message: "Success"} and return
     else
       render :json => {message: "Error"} and return
     end
+
   end
 
-
-
-  private
 
   def todo_params
     params.permit(params[:task],params[:id])
